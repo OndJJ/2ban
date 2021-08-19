@@ -20,27 +20,27 @@
     .container img{
         width: 100%;
         border-radius: 1rem;
-        height: 100%;
+
     }
 
 
 </style>
 
     <div class="container">
-      <div class="item1">1
+      <div class="item1">
         <img src="https://picsum.photos/200/300" alt="">
       </div>
       <div>
         <img src="https://picsum.photos/200/340" alt="">
       </div>
       <div>
-        <img src="https://picsum.photos/200/260" alt="">
+        <img src="https://picsum.photos/200/310" alt="">
       </div>
       <div>
         <img src="https://picsum.photos/200/400" alt="">
       </div>
       <div>
-        <img src="https://picsum.photos/200/510" alt="">
+        <img src="https://picsum.photos/200/460" alt="">
       </div>
        <div>
         <img src="https://picsum.photos/200/300" alt="">
@@ -49,7 +49,7 @@
         <img src="https://picsum.photos/200/250" alt="">
       </div>
        <div>
-        <img src="https://picsum.photos/200/200" alt="">
+        <img src="https://picsum.photos/200/280" alt="">
       </div>
       <div>
         <img src="https://picsum.photos/200/440" alt="">
@@ -66,6 +66,12 @@
       <div>
         <img src="https://picsum.photos/200/430" alt="">
       </div>
+    </div>
+
+    <div style="text-align: center">
+        <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill col-3 mt-3 mb-3">
+            Create Article
+        </a>
     </div>
 
     <script src="{% static 'js/magicgrid.js' %}"></script>
