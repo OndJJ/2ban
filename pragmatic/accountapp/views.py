@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -34,7 +34,6 @@ def hello_world(request):
             return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
 
 
-
 class AccountCreateView(CreateView):
     model = User
     form_class = UserCreationForm
@@ -46,6 +45,7 @@ class AccountDetailView(DetailView):
     model = User
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
+
 
 @method_decorator(has_ownership, 'get')
 @method_decorator(has_ownership, 'post')
@@ -64,4 +64,3 @@ class AccountDeleteView(DeleteView):
     context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:login')
     template_name = 'accountapp/Delete.html'
-
