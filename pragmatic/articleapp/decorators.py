@@ -9,4 +9,5 @@ def article_ownership_required(func):
         if not article.writer == request.user:
             return HttpResponseForbidden()
         return func(request, *args, **kwargs)
+
     return decorated
