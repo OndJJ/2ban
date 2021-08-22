@@ -6,44 +6,47 @@
  */
 
 /**
+ * Handles invalid configuration object
+ * errors.
+ *
+ * @param prop - a property with a missing value
+ */
+const error = function (prop) {
+  throw new Error(("Missing property '" + prop + "' in MagicGrid config"));
+};
+/**
  * Validates the configuration object.
  *
  * @param config - configuration object
  */
-var checkParams = function (config) {
-  var DEFAULT_GUTTER = 25;
-  var booleanProps = ["useTransform", "center"];
+const checkParams = function (config) {
+  const DEFAULT_GUTTER = 25;
+  const booleanProps = ["useTransform", "center"];
 
 
   if (!config) {
     throw new Error("No config object has been provided.");
   }
 
-  for(var prop of booleanProps){
-    if(typeof config[prop] !== "boolean"){
+  for (const prop of booleanProps) {
+    if (typeof config[prop] !== "boolean") {
       config[prop] = true;
     }
   }
 
 
-  if(typeof config.gutter !== "number"){
+  if (typeof config.gutter !== "number") {
     config.gutter = DEFAULT_GUTTER;
   }
 
-  if (!config.container) { error("container"); }
-  if (!config.items && !config.static) { error("items or static"); }
+  if (!config.container) {
+    error("container");
+  }
+  if (!config.items && !config.static) {
+    error("items or static");
+  }
 };
 
-
-/**
- * Handles invalid configuration object
- * errors.
- *
- * @param prop - a property with a missing value
- */
-var error = function (prop) {
-  throw new Error(("Missing property '" + prop + "' in MagicGrid config"));
-};
 
 /**
  * Finds the shortest column in
@@ -53,11 +56,13 @@ var error = function (prop) {
  *
  * @return shortest column
  */
-var getMin = function (cols) {
-  var min = cols[0];
+const getMin = function (cols) {
+  let min = cols[0];
 
-  for (var col of cols) {
-    if (col.height < min.height) { min = col; }
+  for (const col of cols) {
+    if (col.height < min.height) {
+      min = col;
+    }
   }
 
   return min;
@@ -71,15 +76,13 @@ var getMin = function (cols) {
  * implementation of a flexible
  * grid layout.
  */
-
-var MagicGrid = function MagicGrid (config) {
+const MagicGrid = function MagicGrid(config) {
   checkParams(config);
 
   if (config.container instanceof HTMLElement) {
     this.container = config.container;
     this.containerClass = config.container.className;
-  }
-  else {
+  } else {
     this.containerClass = config.container;
     this.container = document.querySelector(config.container);
   }
@@ -108,8 +111,8 @@ MagicGrid.prototype.init = function init () {
 
   this.container.style.position = "relative";
 
-  for (var i = 0; i < this.items.length; i++) {
-    var style = this.items[i].style;
+  for (let i = 0; i < this.items.length; i++) {
+    const style = this.items[i].style;
 
     style.position = "absolute";
 
@@ -139,20 +142,20 @@ MagicGrid.prototype.colWidth = function colWidth () {
  * @private
  */
 MagicGrid.prototype.setup = function setup () {
-  var width = this.container.getBoundingClientRect().width;
-  var colWidth = this.colWidth();
-  var numCols = Math.floor(width/colWidth) || 1;
-  var cols = [];
+  const width = this.container.getBoundingClientRect().width;
+  const colWidth = this.colWidth();
+  let numCols = Math.floor(width / colWidth) || 1;
+  const cols = [];
 
   if (this.maxColumns && numCols > this.maxColumns) {
     numCols = this.maxColumns;
   }
 
-  for (var i = 0; i < numCols; i++) {
+  for (let i = 0; i < numCols; i++) {
     cols[i] = {height: 0, index: i};
   }
 
-  var wSpace = width - numCols * colWidth + this.gutter;
+  const wSpace = width - numCols * colWidth + this.gutter;
 
   return {cols: cols, wSpace: wSpace};
 };
@@ -181,20 +184,20 @@ MagicGrid.prototype.nextCol = function nextCol (cols, i) {
  * the height of the grid.
  */
 MagicGrid.prototype.positionItems = function positionItems () {
-  var ref = this.setup();
-    var cols = ref.cols;
-    var wSpace = ref.wSpace;
-  var maxHeight = 0;
-  var colWidth = this.colWidth();
+  const ref = this.setup();
+  const cols = ref.cols;
+  let wSpace = ref.wSpace;
+  let maxHeight = 0;
+  const colWidth = this.colWidth();
 
   wSpace = this.center ? Math.floor(wSpace / 2) : 0;
 
-  for (var i = 0; i < this.items.length; i++) {
-    var col = this.nextCol(cols, i);
-    var item = this.items[i];
-    var topGutter = col.height ? this.gutter : 0;
-    var left = col.index * colWidth + wSpace + "px";
-    var top = col.height + topGutter + "px";
+  for (let i = 0; i < this.items.length; i++) {
+    const col = this.nextCol(cols, i);
+    const item = this.items[i];
+    const topGutter = col.height ? this.gutter : 0;
+    const left = col.index * colWidth + wSpace + "px";
+    const top = col.height + topGutter + "px";
 
     if(this.useTransform){
       item.style.transform = "translate(" + left + ", " + top + ")";
@@ -234,9 +237,9 @@ MagicGrid.prototype.ready = function ready () {
  * @private
  */
 MagicGrid.prototype.getReady = function getReady () {
-    var this$1 = this;
+  const this$1 = this;
 
-  var interval = setInterval(function () {
+  const interval = setInterval(function () {
     this$1.container = document.querySelector(this$1.containerClass);
     this$1.items = this$1.container.children;
 
@@ -255,10 +258,10 @@ MagicGrid.prototype.getReady = function getReady () {
  * window size changes.
  */
 MagicGrid.prototype.listen = function listen () {
-    var this$1 = this;
+  const this$1 = this;
 
   if (this.ready()) {
-    var timeout;
+    let timeout;
 
     window.addEventListener("resize", function () {
       if (!timeout){
@@ -282,7 +285,7 @@ let magicGrid = new MagicGrid({
   useMin: true
 });
 
-var masonrys = document.getElementsByTagName('img');
+const masonrys = document.getElementsByTagName('img');
 
 for (let i = 0; i< masonrys.length; i++) {
     masonrys[i].addEventListener('load',function () {
