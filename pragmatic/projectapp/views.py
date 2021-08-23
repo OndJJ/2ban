@@ -1,5 +1,4 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse
@@ -10,6 +9,7 @@ from django.views.generic.list import MultipleObjectMixin
 from articleapp.models import Article
 from projectapp.forms import ProjectCreationForm
 from projectapp.models import Project
+from subscribeapp.models import Subscription
 
 
 @method_decorator(login_required, 'get')
@@ -20,23 +20,30 @@ class ProjectCreateView(CreateView):
     template_name = 'projectapp/create.html'
 
     def get_success_url(self):
-        return reverse('projecteapp:detail', kwargs={'pk': self.object.pk})
+        return reverse('projectapp:detail', kwargs={'pk':self.object.pk})
 
 
 class ProjectDetailView(DetailView, MultipleObjectMixin):
     model = Project
-    context_object_name = 'target_Project'
-    template_name = 'Projectapp/detail.html'
-
-    paginate_by = 25
+    context_object_name = 'target_project'
+    template_name = 'projectapp/detail.html'
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
-        object_list = Article.objects.filter(project=self.get_object())
-        return super(ProjectDetailView, self).get_context_data(object_list=object_list, **kwargs)
+        user = self.request.user
+        project = self.object
+
+        if user.is_authenticated:
+            subscription = Subscription.objects.filter(user=user,project=project)
+        else:
+            subscription = None
+
+        article_list = Article.objects.filter(project=self.object)
+        return super().get_context_data(object_list=article_list, subscription=subscription, **kwargs)
 
 
 class ProjectListView(ListView):
     model = Project
     context_object_name = 'project_list'
     template_name = 'projectapp/list.html'
-    paginate_by = 25
+    paginate_by = 20

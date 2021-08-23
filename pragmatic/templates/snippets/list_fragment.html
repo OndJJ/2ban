@@ -1,18 +1,15 @@
-
 {% load static %}
-
-
 
 <style>
 
     .container {
         padding: 0;
-        margin: 0, auto;
+        margin: 0 auto;
     }
 
     .container a {
-        width: 45%;
-        max-width: 250px;
+      width: 45%;
+      max-width: 250px;
     }
 
     .container div {
@@ -23,18 +20,16 @@
       border-radius: 1rem;
     }
 
-    .container img{
-        width: 100%;
-        border-radius: 1rem;
-
+    .container img {
+      width: 100%;
+      border-radius: 1rem;
     }
-
 
 </style>
     {% if article_list %}
     <div class="container">
         {% for article in article_list %}
-        <a href="{% url 'articleapp:detail' pk=article.pk%}">
+        <a href="{% url 'articleapp:detail' pk=article.pk %}">
             {% include 'snippets/card.html' with article=article %}
         </a>
         {% endfor %}
@@ -42,7 +37,7 @@
     <script src="{% static 'js/magicgrid.js' %}"></script>
     {% else %}
     <div class="text-center">
-        <h1>No Articles YEY!</h1>
+        <h1>No Articles YET!</h1>
     </div>
     {% endif %}
 
