@@ -8,10 +8,12 @@
             {% if target_user.profile %}
              <img src="{{ target_user.profile.image.url }}" alt=""
                   style="height: 12rem; width: 12rem; border-radius: 20rem; margin-bottom: 2rem; object-fit: cover;">
-            <h2 style="font-family: 'NanumSquareB'">
+            <h2 style="font-family: 'NanumSquareB',serif">
                 {{ target_user.profile.nickname }}
                 {% if target_user == user %}
-                <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+                <a class="material-icons"
+                   style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .3rem;"
+                   href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
                     edit
                 </a>
                 {% endif %}
@@ -22,7 +24,7 @@
             {% else %}
             {% if target_user == user %}
             <a href="{% url 'profileapp:create' %}">
-                <h2 style="font-family: 'NanumSquareB'">
+                <h2 style="font-family: 'NanumSquareB',serif">
                 Create Profile
                 </h2>
             </a>
@@ -35,16 +37,16 @@
 
 
             {% if target_user == user %}
-            <a href= "{% url 'accountapp:update' pk=user.pk %}" >
-                <p>
-                    Change Info
-                </p>
-            </a>
-            <a href="{% url 'accountapp:delete' pk=user.pk %}">
-                <p>
-                    Quit
-                </p>
-            </a>
+                <a class="material-icons"
+                   style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .3rem;"
+                   href= "{% url 'accountapp:update' pk=user.pk %}" >
+                    settings
+                </a>
+                <a class="material-icons"
+                   style="box-shadow: 0 0 4px #fcc; border-radius: 10rem; padding: .3rem;"
+                   href="{% url 'accountapp:delete' pk=user.pk %}">
+                    cancel
+                </a>
             {% endif %}
         </div>
 

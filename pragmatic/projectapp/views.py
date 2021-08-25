@@ -34,12 +34,14 @@ class ProjectDetailView(DetailView, MultipleObjectMixin):
         project = self.object
 
         if user.is_authenticated:
-            subscription = Subscription.objects.filter(user=user,project=project)
+            subscription = Subscription.objects.filter(user=user, project=project)
         else:
             subscription = None
 
-        article_list = Article.objects.filter(project=self.object)
-        return super().get_context_data(object_list=article_list, subscription=subscription, **kwargs)
+        object_list = Article.objects.filter(project=self.object)
+        return super(ProjectDetailView, self).get_context_data(object_list=object_list,
+                                                               subscription=subscription,
+                                                               **kwargs)
 
 
 class ProjectListView(ListView):
