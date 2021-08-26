@@ -1,7 +1,7 @@
 # Pragmatic_
 
 
-인프런 작정하고 DJANGO clone coding 
+## 인프런 작정하고 DJANGO clone coding 
 
 
     # 초기 설정
