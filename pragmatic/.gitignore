@@ -78,6 +78,7 @@ venv/
 
 .env
 
+
 db.sqlite3
 
 .idea/
@@ -86,5 +87,8 @@ __pycache__/
 
 media/
 
+ondj_0302.pem
 
+gis_2ban_gcp
 
+gis_2ban_gcp.pub
