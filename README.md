@@ -41,6 +41,10 @@
 
     # django 에서 제공하는 Message 기능을 통해 유저 편의성 개선이 가능하다. 
       뿐만 아니라 Bootstrap과의 연결시켜 Message의 Level에 따라 디자인을 변경 할 수 있다
-##### Django Message 문서 링크: https://docs.djangoproject.com/en/3.1/ref/contrib/messages/ 
-##### Bootstrap Button 문서 링크: https://getbootstrap.com/docs/5.0/components/buttons/#button-tags 
+##### Django Message 문서 링크 : https://docs.djangoproject.com/en/3.1/ref/contrib/messages/ 
+##### Bootstrap Button 문서 링크 : https://getbootstrap.com/docs/5.0/components/buttons/#button-tags 
     
+----------------------------------------------------
+
+#### AWS 가입 방법 링크 : https://onion.haus/detail/6260
+#### GCP 가입 방법 링크 : https://onion.haus/detail/6264
