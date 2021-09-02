@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 asgiref==3.4.1
 beautifulsoup4==4.9.3
 Django==3.2.6
@@ -8,14 +7,3 @@ Pillow==8.3.1
 pytz==2021.1
 soupsieve==2.2.1
 sqlparse==0.4.1
-=======
-asgiref==3.4.1
-beautifulsoup4==4.9.3
-Django==3.2.6
-django-bootstrap4==3.0.1
-django-environ==0.4.5
-Pillow==8.3.1
-pytz==2021.1
-soupsieve==2.2.1
-sqlparse==0.4.1
->>>>>>> efb8fd176777a8734aa2a4596fe20b6db88a2dc2
