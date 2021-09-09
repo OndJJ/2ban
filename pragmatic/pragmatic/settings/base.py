@@ -14,8 +14,8 @@ import environ
 import os
 from pathlib import Path
 
+from django.contrib import messages
 from django.urls import reverse_lazy
-from django.contrib.messages import constants as messages
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
