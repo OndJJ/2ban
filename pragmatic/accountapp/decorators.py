@@ -8,4 +8,5 @@ def account_ownership_required(func):
         if not user == request.user:
             return HttpResponseForbidden()
         return func(request, *args, **kwargs)
+
     return decorated
