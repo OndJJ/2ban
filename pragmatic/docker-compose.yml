@@ -16,6 +16,8 @@ services:
     image: gis_2ban_django:5
     networks:
       - gis_2ban_network
+    secrets:
+      - DJANGO_SECRET_KEY
     volumes:
       - gis_2ban_media:/home/Pragmatic_/pragmatic/media/
       - gis_2ban_static:/home/Pragmatic_/pragmatic/staticfiles/
@@ -40,3 +42,7 @@ volumes:
   gis_2ban_media:
   gis_2ban_static:
   gis_mariadb:
+
+secrets:
+  DJANGO_SECRET_KEY:
+    external: true
